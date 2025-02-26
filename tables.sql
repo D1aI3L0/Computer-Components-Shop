@@ -21,14 +21,6 @@ CREATE TABLE shop.Processor
 	cpu_count INTEGER
 );
 
-CREATE TABLE shop.Power_Supply
-(
-	id SERIAL PRIMARY KEY,
-	power INTEGER,
-	PLUS80_sertificate VARCHAR(32),
-	form_factor VARCHAR(32)
-);
-
 CREATE TABLE shop.Motherboard
 (
 	id SERIAL PRIMARY KEY,
@@ -55,13 +47,12 @@ CREATE TABLE shop.Product
 	type VARCHAR(32),
 	processor_id INTEGER REFERENCES shop.Processor (id),
 	motherboard_id INTEGER REFERENCES shop.Motherboard (id),
-	graphic_card_id INTEGER REFERENCES shop.Graphic_Card (id),
-	power_supply_id INTEGER REFERENCES shop.Power_Supply (id)
+	graphic_card_id INTEGER REFERENCES shop.Graphic_Card (id)
 );
 
 CREATE TABLE shop.Order
 (
-	order_number SERIAL PRIMARY KEY,
+	id SERIAL PRIMARY KEY,
 	total_price MONEY,
 	order_date DATE,
 	status VARCHAR(64),
@@ -71,9 +62,9 @@ CREATE TABLE shop.Order
 
 CREATE TABLE shop.Product_Order
 (
-	order_number SERIAL PRIMARY KEY,
+	id SERIAL PRIMARY KEY,
 	product_id INTEGER REFERENCES shop.Product (id),
-	order_id INTEGER REFERENCES shop.Order (order_number)
+	order_id INTEGER REFERENCES shop.Order (id)
 );
 
 CREATE TABLE shop.Review
