@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.tables.*;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -12,7 +13,8 @@ public class Main {
 
     static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        DatabaseConnection.Init();
 
         while (true) {
             System.out.println("1. Client");
@@ -211,7 +213,7 @@ public class Main {
                 case 1:
                     System.out.print("Enter price: ");
                     BigDecimal price = scanner.nextBigDecimal();
-                    scanner.nextLine(); // consume newline
+                    scanner.nextLine();
                     System.out.print("Enter name: ");
                     String name = scanner.nextLine();
                     System.out.print("Enter manufacturer: ");

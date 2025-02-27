@@ -22,17 +22,17 @@ public class Product {
             switch (type) {
                 case Processor:
                     pstmt.setInt(5, processorId);
-                    pstmt.setNull(6, java.sql.Types.INTEGER); // motherboard_id = NULL
-                    pstmt.setNull(7, java.sql.Types.INTEGER); // graphic_card_id = NULL
+                    pstmt.setNull(6, java.sql.Types.INTEGER);
+                    pstmt.setNull(7, java.sql.Types.INTEGER);
                     break;
                 case Motherboard:
-                    pstmt.setNull(5, java.sql.Types.INTEGER); // processor_id = NULL
+                    pstmt.setNull(5, java.sql.Types.INTEGER);
                     pstmt.setInt(6, motherboardId);
-                    pstmt.setNull(7, java.sql.Types.INTEGER); // graphic_card_id = NULL
+                    pstmt.setNull(7, java.sql.Types.INTEGER);
                     break;
                 case GraphicCard:
-                    pstmt.setNull(5, java.sql.Types.INTEGER); // processor_id = NULL
-                    pstmt.setNull(6, java.sql.Types.INTEGER); // motherboard_id = NULL
+                    pstmt.setNull(5, java.sql.Types.INTEGER);
+                    pstmt.setNull(6, java.sql.Types.INTEGER);
                     pstmt.setInt(7, graphicCardId);
                     break;
             }
@@ -57,7 +57,6 @@ public class Product {
                 System.out.println("Price: " + rs.getDouble("price"));
                 System.out.println("Name: " + rs.getString("name"));
                 System.out.println("Manufacturer: " + rs.getString("manufacturer"));
-                // Преобразуем строку обратно в enum
                 ProductType type = ProductType.valueOf(rs.getString("type"));
                 System.out.println("Type: " + type);
                 System.out.println("Processor ID: " + rs.getInt("processor_id"));
