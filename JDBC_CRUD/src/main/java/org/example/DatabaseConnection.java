@@ -1,28 +1,30 @@
 package org.example;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Properties;
 
 public class DatabaseConnection {
 
-    static Properties props;
 
-    public static void Init() throws IOException {
-        props = new Properties();
+    private DatabaseConnection() {}
+
+    public static Connection getConnection() {
+        Connection connection;
         try {
-            InputStream input = DatabaseConnection.class.getClassLoader().getResourceAsStream(".dbconfig.properties");
-            props.load(input);
-        }catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
+            Class.forName("org.postgresql.Driver");
+            Properties properties = new Properties();
+            properties.load(DatabaseConnection.class.getClassLoader().getResourceAsStream(".dbconfig.properties"));
 
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(props.getProperty("db.url"), props.getProperty("db.username"), props.getProperty("db.password"));
+            String url = properties.getProperty("db.url");
+            String username = properties.getProperty("db.username");
+            String password = properties.getProperty("db.password");
+
+            connection = DriverManager.getConnection(url, username, password);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Ошибка при подключении к базе данных", e);
+        }
+        return connection;
     }
 }
