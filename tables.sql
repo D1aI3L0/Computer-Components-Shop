@@ -41,7 +41,7 @@ CREATE TABLE shop.Graphic_Card
 CREATE TABLE shop.Product
 (
 	id SERIAL PRIMARY KEY,
-	price MONEY,
+	price REAL,
 	name VARCHAR(64),
 	manufacturer VARCHAR(64),
 	type VARCHAR(32),
@@ -53,7 +53,7 @@ CREATE TABLE shop.Product
 CREATE TABLE shop.Order
 (
 	id SERIAL PRIMARY KEY,
-	total_price MONEY,
+	total_price REAL,
 	order_date DATE,
 	status VARCHAR(64),
 	payment_method VARCHAR(32),
