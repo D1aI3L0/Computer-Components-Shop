@@ -1,5 +1,6 @@
 package com.example.springBackend_Hibernate.controller;
 
+import com.example.springBackend_Hibernate.MEntityNotFoundException;
 import com.example.springBackend_Hibernate.entity.Client;
 import com.example.springBackend_Hibernate.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class ClientController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Client> updateClient(@PathVariable Long id, @RequestBody Client clientDetails) {
+    public ResponseEntity<Client> updateClient(@PathVariable Long id, @RequestBody Client clientDetails) throws MEntityNotFoundException {
         return ResponseEntity.ok(clientService.updateClient(id, clientDetails));
     }
 

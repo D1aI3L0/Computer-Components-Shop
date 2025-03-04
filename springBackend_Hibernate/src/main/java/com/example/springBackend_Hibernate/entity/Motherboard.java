@@ -10,11 +10,13 @@ public class Motherboard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "memory_slots")
     private Integer memorySlots;
 
+    @Column(name = "chipset")
     private String chipset;
 
     @Column(name = "form_factor")

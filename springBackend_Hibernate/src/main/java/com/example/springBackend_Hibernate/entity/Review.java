@@ -11,6 +11,7 @@ public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @ManyToOne
@@ -21,5 +22,6 @@ public class Review {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    @Column(name = "review")
     private String review;
 }

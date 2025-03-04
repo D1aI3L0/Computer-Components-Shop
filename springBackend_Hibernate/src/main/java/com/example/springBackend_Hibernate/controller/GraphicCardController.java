@@ -1,6 +1,7 @@
 package com.example.springBackend_Hibernate.controller;
 
 
+import com.example.springBackend_Hibernate.MEntityNotFoundException;
 import com.example.springBackend_Hibernate.entity.GraphicCard;
 import com.example.springBackend_Hibernate.service.GraphicCardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class GraphicCardController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<GraphicCard> updateGraphicCard(@PathVariable Long id, @RequestBody GraphicCard graphicCardDetails) {
+    public ResponseEntity<GraphicCard> updateGraphicCard(@PathVariable Long id, @RequestBody GraphicCard graphicCardDetails) throws MEntityNotFoundException {
         return ResponseEntity.ok(graphicCardService.updateGraphicCard(id, graphicCardDetails));
     }
 

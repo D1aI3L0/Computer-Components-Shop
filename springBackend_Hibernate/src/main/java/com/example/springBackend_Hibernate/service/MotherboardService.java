@@ -1,6 +1,7 @@
 package com.example.springBackend_Hibernate.service;
 
 
+import com.example.springBackend_Hibernate.MEntityNotFoundException;
 import com.example.springBackend_Hibernate.entity.Motherboard;
 import com.example.springBackend_Hibernate.repository.MotherboardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,8 @@ public class MotherboardService {
         return motherboardRepository.save(motherboard);
     }
 
-    public Motherboard updateMotherboard(Long id, Motherboard motherboardDetails) {
-        Motherboard motherboard = motherboardRepository.findById(id).orElseThrow(() -> new RuntimeException("Motherboard not found"));
+    public Motherboard updateMotherboard(Long id, Motherboard motherboardDetails) throws MEntityNotFoundException {
+        Motherboard motherboard = motherboardRepository.findById(id).orElseThrow(() -> new MEntityNotFoundException("Motherboard not found with id: " + id));
         motherboard.setMemorySlots(motherboardDetails.getMemorySlots());
         motherboard.setChipset(motherboardDetails.getChipset());
         motherboard.setFormFactor(motherboardDetails.getFormFactor());

@@ -1,5 +1,6 @@
 package com.example.springBackend_Hibernate.service;
 
+import com.example.springBackend_Hibernate.MEntityNotFoundException;
 import com.example.springBackend_Hibernate.entity.Client;
 import com.example.springBackend_Hibernate.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,8 @@ public class ClientService {
         return clientRepository.save(client);
     }
 
-    public Client updateClient(Long id, Client clientDetails) {
-        Client client = clientRepository.findById(id).orElseThrow(() -> new RuntimeException("Client not found"));
+    public Client updateClient(Long id, Client clientDetails) throws MEntityNotFoundException {
+        Client client = clientRepository.findById(id).orElseThrow(() -> new MEntityNotFoundException("Client not found with id: " + id));
         client.setPhoneNumber(clientDetails.getPhoneNumber());
         client.setName(clientDetails.getName());
         client.setSurname(clientDetails.getSurname());

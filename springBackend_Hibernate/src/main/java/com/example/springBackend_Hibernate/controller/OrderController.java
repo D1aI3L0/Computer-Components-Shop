@@ -1,7 +1,8 @@
 package com.example.springBackend_Hibernate.controller;
 
 
-import com.example.springBackend_Hibernate.entity.Order;
+import com.example.springBackend_Hibernate.MEntityNotFoundException;
+import com.example.springBackend_Hibernate.dto.OrderDTO;
 import com.example.springBackend_Hibernate.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,25 +18,24 @@ public class OrderController {
     private OrderService orderService;
 
     @GetMapping
-    public List<Order> getAllOrders() {
-        return orderService.getAllOrders();
+    public ResponseEntity<List<OrderDTO>> getAllOrders() {
+        return ResponseEntity.ok(orderService.getAllOrders());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
-        return orderService.getOrderById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<OrderDTO> getOrderById(@PathVariable Long id) {
+        OrderDTO orderDTO = orderService.getOrderById(id);
+        return orderDTO != null ? ResponseEntity.ok(orderDTO) : ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    public Order createOrder(@RequestBody Order order) {
-        return orderService.createOrder(order);
+    public OrderDTO createOrder(@RequestBody OrderDTO orderDTO) {
+        return orderService.createOrder(orderDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Order> updateOrder(@PathVariable Long id, @RequestBody Order orderDetails) {
-        return ResponseEntity.ok(orderService.updateOrder(id, orderDetails));
+    public ResponseEntity<OrderDTO> updateOrder(@PathVariable Long id, @RequestBody OrderDTO orderDTO) throws MEntityNotFoundException {
+        return ResponseEntity.ok(orderService.updateOrder(id, orderDTO));
     }
 
     @DeleteMapping("/{id}")

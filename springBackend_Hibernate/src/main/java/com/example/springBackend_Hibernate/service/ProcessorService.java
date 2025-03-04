@@ -1,6 +1,7 @@
 package com.example.springBackend_Hibernate.service;
 
 
+import com.example.springBackend_Hibernate.MEntityNotFoundException;
 import com.example.springBackend_Hibernate.entity.Processor;
 import com.example.springBackend_Hibernate.repository.ProcessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,8 @@ public class ProcessorService {
         return processorRepository.save(processor);
     }
 
-    public Processor updateProcessor(Long id, Processor processorDetails) {
-        Processor processor = processorRepository.findById(id).orElseThrow(() -> new RuntimeException("Processor not found"));
+    public Processor updateProcessor(Long id, Processor processorDetails) throws MEntityNotFoundException {
+        Processor processor = processorRepository.findById(id).orElseThrow(() -> new MEntityNotFoundException("Processor not found with id: " + id));
         processor.setThreadsCount(processorDetails.getThreadsCount());
         processor.setClockFrequency(processorDetails.getClockFrequency());
         processor.setMaxFrequency(processorDetails.getMaxFrequency());

@@ -1,6 +1,8 @@
 package com.example.springBackend_Hibernate.controller;
 
 
+import com.example.springBackend_Hibernate.MEntityNotFoundException;
+import com.example.springBackend_Hibernate.dto.ProductDTO;
 import com.example.springBackend_Hibernate.entity.Product;
 import com.example.springBackend_Hibernate.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,33 +18,27 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    // Получить все продукты
     @GetMapping
-    public List<Product> getAllProducts() {
+    public List<ProductDTO> getAllProducts() {
         return productService.getAllProducts();
     }
 
-    // Получить продукт по ID
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
-        return productService.getProductById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
+        ProductDTO productDTO = productService.getProductById(id);
+        return productDTO != null ? ResponseEntity.ok(productDTO) : ResponseEntity.notFound().build();
     }
 
-    // Создать новый продукт
     @PostMapping
-    public Product createProduct(@RequestBody Product product) {
-        return productService.createProduct(product);
+    public ProductDTO createProduct(@RequestBody ProductDTO productDTO) {
+        return productService.createProduct(productDTO);
     }
 
-    // Обновить продукт
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product productDetails) {
+    public ResponseEntity<ProductDTO> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDetails) throws MEntityNotFoundException {
         return ResponseEntity.ok(productService.updateProduct(id, productDetails));
     }
 
-    // Удалить продукт
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);

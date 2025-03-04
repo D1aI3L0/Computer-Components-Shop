@@ -1,6 +1,7 @@
 package com.example.springBackend_Hibernate.controller;
 
 
+import com.example.springBackend_Hibernate.MEntityNotFoundException;
 import com.example.springBackend_Hibernate.entity.Review;
 import com.example.springBackend_Hibernate.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class ReviewController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Review> updateReview(@PathVariable Long id, @RequestBody Review reviewDetails) {
+    public ResponseEntity<Review> updateReview(@PathVariable Long id, @RequestBody Review reviewDetails) throws MEntityNotFoundException {
         return ResponseEntity.ok(reviewService.updateReview(id, reviewDetails));
     }
 

@@ -1,41 +1,60 @@
 package com.example.springBackend_Hibernate.service;
 
+import com.example.springBackend_Hibernate.MEntityNotFoundException;
+import com.example.springBackend_Hibernate.dto.ProductDTO;
+import com.example.springBackend_Hibernate.entity.Order;
 import com.example.springBackend_Hibernate.entity.Product;
+import com.example.springBackend_Hibernate.mapper.*;
 import com.example.springBackend_Hibernate.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private ProcessorMapper processorMapper;
+    @Autowired
+    private GraphicCardMapper graphicCardMapper;
+    @Autowired
+    private MotherboardMapper motherboardMapper;
 
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    @Autowired
+    private ProductMapper productMapper;
+
+    public List<ProductDTO> getAllProducts() {
+        return productRepository.findAll().stream()
+                .map(productMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
-    public Optional<Product> getProductById(Long id) {
-        return productRepository.findById(id);
+    public ProductDTO getProductById(Long id) {
+        return productRepository.findById(id)
+                .map(productMapper::toDTO)
+                .orElse(null);
     }
 
-    public Product createProduct(Product product) {
-        return productRepository.save(product);
+    public ProductDTO createProduct(ProductDTO productDTO) {
+        return productMapper.toDTO(productRepository.save(productMapper.toEntity(productDTO)));
     }
 
-    public Product updateProduct(Long id, Product productDetails) {
-        Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+    public ProductDTO updateProduct(Long id, ProductDTO productDetails) throws MEntityNotFoundException {
+        Product product = productRepository.findById(id).orElseThrow(() -> new MEntityNotFoundException("Product not found with id: " + id));
         product.setPrice(productDetails.getPrice());
         product.setName(productDetails.getName());
         product.setManufacturer(productDetails.getManufacturer());
         product.setType(productDetails.getType());
-        product.setProcessor(productDetails.getProcessor());
-        product.setMotherboard(productDetails.getMotherboard());
-        product.setGraphicCard(productDetails.getGraphicCard());
-        return productRepository.save(product);
+        product.setProcessor(processorMapper.toEntity(productDetails.getProcessor()));
+        product.setMotherboard(motherboardMapper.toEntity(productDetails.getMotherboard()));
+        product.setGraphicCard(graphicCardMapper.toEntity(productDetails.getGraphicCard()));
+
+        return productMapper.toDTO(productRepository.save(product));
     }
 
     public void deleteProduct(Long id) {

@@ -1,11 +1,13 @@
 package com.example.springBackend_Hibernate.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -14,6 +16,7 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "total_price")
@@ -30,4 +33,12 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
+
+    @JsonManagedReference
+    @ManyToMany
+    @JoinTable(
+            name = "product_order",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    Set<Product> products;
 }

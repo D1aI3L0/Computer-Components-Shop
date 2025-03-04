@@ -1,5 +1,6 @@
 package com.example.springBackend_Hibernate.service;
 
+import com.example.springBackend_Hibernate.MEntityNotFoundException;
 import com.example.springBackend_Hibernate.entity.GraphicCard;
 import com.example.springBackend_Hibernate.repository.GraphicCardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,8 @@ public class GraphicCardService {
         return graphicCardRepository.save(graphicCard);
     }
 
-    public GraphicCard updateGraphicCard(Long id, GraphicCard graphicCardDetails) {
-        GraphicCard graphicCard = graphicCardRepository.findById(id).orElseThrow(() -> new RuntimeException("GraphicCard not found"));
+    public GraphicCard updateGraphicCard(Long id, GraphicCard graphicCardDetails) throws MEntityNotFoundException {
+        GraphicCard graphicCard = graphicCardRepository.findById(id).orElseThrow(() -> new MEntityNotFoundException("GraphicCard not found with id: " + id));
         graphicCard.setGpuCount(graphicCardDetails.getGpuCount());
         graphicCard.setGpuFrequency(graphicCardDetails.getGpuFrequency());
         graphicCard.setMemoryCount(graphicCardDetails.getMemoryCount());

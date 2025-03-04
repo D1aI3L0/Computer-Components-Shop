@@ -1,6 +1,7 @@
 package com.example.springBackend_Hibernate.service;
 
 
+import com.example.springBackend_Hibernate.MEntityNotFoundException;
 import com.example.springBackend_Hibernate.entity.Review;
 import com.example.springBackend_Hibernate.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,8 @@ public class ReviewService {
         return reviewRepository.save(review);
     }
 
-    public Review updateReview(Long id, Review reviewDetails) {
-        Review review = reviewRepository.findById(id).orElseThrow(() -> new RuntimeException("Review not found"));
+    public Review updateReview(Long id, Review reviewDetails) throws MEntityNotFoundException {
+        Review review = reviewRepository.findById(id).orElseThrow(() -> new MEntityNotFoundException("Review not found with id: " + id));
         review.setClient(reviewDetails.getClient());
         review.setProduct(reviewDetails.getProduct());
         review.setReview(reviewDetails.getReview());

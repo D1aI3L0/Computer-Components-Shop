@@ -1,6 +1,7 @@
 package com.example.springBackend_Hibernate.controller;
 
 
+import com.example.springBackend_Hibernate.MEntityNotFoundException;
 import com.example.springBackend_Hibernate.entity.Processor;
 import com.example.springBackend_Hibernate.service.ProcessorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class ProcessorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Processor> updateProcessor(@PathVariable Long id, @RequestBody Processor processorDetails) {
+    public ResponseEntity<Processor> updateProcessor(@PathVariable Long id, @RequestBody Processor processorDetails) throws MEntityNotFoundException {
         return ResponseEntity.ok(processorService.updateProcessor(id, processorDetails));
     }
 
