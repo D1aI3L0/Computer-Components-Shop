@@ -18,7 +18,7 @@ public class OrderController {
     private OrderService orderService;
 
     @GetMapping
-    public ResponseEntity<List<OrderDTO>> getAllOrders() {
+    public ResponseEntity<List<OrderDTO>> getAllOrders() throws InterruptedException {
         return ResponseEntity.ok(orderService.getAllOrders());
     }
 

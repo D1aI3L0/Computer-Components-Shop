@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -18,5 +19,5 @@ public class OrderDTO {
     private String status;
     private String paymentMethod;
     private Client client;
-    private Set<ProductDTO> products;
+    private List<ProductDTO> products;
 }

@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -14,6 +14,8 @@ import java.util.Set;
 @Entity
 @Table(name = "Product", schema = "shop")
 public class Product {
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,5 +41,5 @@ public class Product {
 
     @JsonBackReference
     @ManyToMany(mappedBy = "products")
-    Set<Order> orders;
+    List<Order> orders;
 }

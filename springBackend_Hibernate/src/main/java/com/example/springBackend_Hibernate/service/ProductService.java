@@ -2,15 +2,16 @@ package com.example.springBackend_Hibernate.service;
 
 import com.example.springBackend_Hibernate.MEntityNotFoundException;
 import com.example.springBackend_Hibernate.dto.ProductDTO;
-import com.example.springBackend_Hibernate.entity.Order;
 import com.example.springBackend_Hibernate.entity.Product;
 import com.example.springBackend_Hibernate.mapper.*;
 import com.example.springBackend_Hibernate.repository.ProductRepository;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,15 +19,8 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
-    @Autowired
-    private ProcessorMapper processorMapper;
-    @Autowired
-    private GraphicCardMapper graphicCardMapper;
-    @Autowired
-    private MotherboardMapper motherboardMapper;
 
-    @Autowired
-    private ProductMapper productMapper;
+    private final ProductMapper productMapper = new ProductMapper();
 
     public List<ProductDTO> getAllProducts() {
         return productRepository.findAll().stream()
@@ -50,9 +44,9 @@ public class ProductService {
         product.setName(productDetails.getName());
         product.setManufacturer(productDetails.getManufacturer());
         product.setType(productDetails.getType());
-        product.setProcessor(processorMapper.toEntity(productDetails.getProcessor()));
-        product.setMotherboard(motherboardMapper.toEntity(productDetails.getMotherboard()));
-        product.setGraphicCard(graphicCardMapper.toEntity(productDetails.getGraphicCard()));
+        product.setProcessor(productDetails.getProcessor());
+        product.setMotherboard(productDetails.getMotherboard());
+        product.setGraphicCard(productDetails.getGraphicCard());
 
         return productMapper.toDTO(productRepository.save(product));
     }

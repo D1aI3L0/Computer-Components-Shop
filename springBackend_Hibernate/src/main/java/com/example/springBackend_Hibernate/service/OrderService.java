@@ -17,12 +17,10 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
-    @Autowired
-    private OrderMapper orderMapper;
+    private final OrderMapper orderMapper = new OrderMapper();
 
-    public List<OrderDTO> getAllOrders() {
-        List<Order> orders = orderRepository.findAll();
-        return orders.stream()
+    public List<OrderDTO> getAllOrders() throws InterruptedException {
+        return orderRepository.findAll().stream()
                 .map(orderMapper::toDTO)
                 .collect(Collectors.toList());
     }
