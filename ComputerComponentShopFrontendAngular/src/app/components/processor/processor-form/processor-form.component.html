@@ -1,0 +1,55 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ processorId ? 'Save' : 'Add' }} Processor</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="processorForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Threads Count</mat-label>
+        <input matInput formControlName="threadsCount" type="number" required />
+        <mat-error *ngIf="processorForm.get('threadsCount')?.hasError('required')">
+          Threads count is required.
+        </mat-error>
+        <mat-error *ngIf="processorForm.get('threadsCount')?.hasError('min')">
+          Threads count must be at least 1.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Clock Frequency</mat-label>
+        <input matInput formControlName="clockFrequency" (input)="onInput($event)" required />
+        <mat-error *ngIf="processorForm.get('clockFrequency')?.hasError('required')">
+          Clock frequency is required.
+        </mat-error>
+        <mat-error *ngIf="processorForm.get('clockFrequency')?.hasError('min')">
+          Clock frequency must be a positive number.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Max Frequency</mat-label>
+        <input matInput formControlName="maxFrequency" (input)="onInput($event)" required />
+        <mat-error *ngIf="processorForm.get('maxFrequency')?.hasError('required')">
+          Max frequency is required.
+        </mat-error>
+        <mat-error *ngIf="processorForm.get('maxFrequency')?.hasError('min')">
+          Max frequency must be a positive number.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>CPU Count</mat-label>
+        <input matInput formControlName="cpuCount" type="number" required />
+        <mat-error *ngIf="processorForm.get('cpuCount')?.hasError('required')">
+          CPU count is required.
+        </mat-error>
+        <mat-error *ngIf="processorForm.get('cpuCount')?.hasError('min')">
+          CPU count must be at least 1.
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" [disabled]="processorForm.invalid">
+        {{ processorId ? 'Save' : 'Add' }}
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

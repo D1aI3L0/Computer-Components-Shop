@@ -4,6 +4,7 @@ import com.example.springBackend_Hibernate.MEntityNotFoundException;
 import com.example.springBackend_Hibernate.dto.OrderDTO;
 import com.example.springBackend_Hibernate.entity.Order;
 import com.example.springBackend_Hibernate.mapper.OrderMapper;
+import com.example.springBackend_Hibernate.mapper.ProductMapper;
 import com.example.springBackend_Hibernate.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class OrderService {
     private OrderRepository orderRepository;
 
     private final OrderMapper orderMapper = new OrderMapper();
+    private final ProductMapper productMapper = new ProductMapper();
 
     public List<OrderDTO> getAllOrders() throws InterruptedException {
         return orderRepository.findAll().stream()
@@ -46,6 +48,7 @@ public class OrderService {
         existingOrder.setStatus(orderDTO.getStatus());
         existingOrder.setPaymentMethod(orderDTO.getPaymentMethod());
         existingOrder.setClient(orderDTO.getClient());
+        existingOrder.setProducts(productMapper.fromProductDTOToProductListWithID(orderDTO.getProducts()));
 
         Order updatedOrder = orderRepository.save(existingOrder);
         return orderMapper.toDTO(updatedOrder);

@@ -1,0 +1,46 @@
+<div class="graphic-card-list-container">
+    <button mat-raised-button color="primary" (click)="addNewGraphicCard()">
+      Add New Graphic Card
+    </button>
+  
+    <table mat-table [dataSource]="graphicCards">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let card">{{ card.id }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="gpu_count">
+        <th mat-header-cell *matHeaderCellDef>GPU Count</th>
+        <td mat-cell *matCellDef="let card">{{ card.gpuCount }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="gpu_frequency">
+        <th mat-header-cell *matHeaderCellDef>GPU Frequency</th>
+        <td mat-cell *matCellDef="let card">{{ card.gpuFrequency | number:'1.2-2' }} GHz</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="memory_count">
+        <th mat-header-cell *matHeaderCellDef>Memory (GB)</th>
+        <td mat-cell *matCellDef="let card">{{ card.memoryCount }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="memory_frequency">
+        <th mat-header-cell *matHeaderCellDef>Memory Frequency</th>
+        <td mat-cell *matCellDef="let card">{{ card.memoryFrequency | number:'1.2-2' }} GHz</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let card">
+          <button mat-icon-button color="primary" (click)="editGraphicCard(card.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteGraphicCard(card.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

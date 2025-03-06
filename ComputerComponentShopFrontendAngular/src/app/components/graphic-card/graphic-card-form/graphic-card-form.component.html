@@ -1,0 +1,44 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ graphicCardId ? 'Edit' : 'Add' }} Graphic Card</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="graphicCardForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>GPU Count</mat-label>
+        <input matInput formControlName="gpuCount" type="number" required />
+        <mat-error *ngIf="graphicCardForm.get('gpuCount')?.hasError('required')">
+          GPU count is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>GPU Frequency (GHz)</mat-label>
+        <input matInput formControlName="gpuFrequency" (input)="onInput($event)" required />
+        <mat-error *ngIf="graphicCardForm.get('gpuFrequency')?.hasError('required')">
+          GPU frequency is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Memory (GB)</mat-label>
+        <input matInput formControlName="memoryCount" type="number" required />
+        <mat-error *ngIf="graphicCardForm.get('memoryCount')?.hasError('required')">
+          Memory is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Memory Frequency (GHz)</mat-label>
+        <input matInput formControlName="memoryFrequency" (input)="onInput($event)" required />
+        <mat-error *ngIf="graphicCardForm.get('memoryFrequency')?.hasError('required')">
+          Memory frequency is required.
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="graphicCardForm.invalid">
+        {{ graphicCardId ? 'Save' : 'Add' }}
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

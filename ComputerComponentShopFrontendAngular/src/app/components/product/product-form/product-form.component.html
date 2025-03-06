@@ -1,0 +1,79 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ isEditMode ? 'Edit' : 'Add' }} Product</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" required />
+        <mat-error *ngIf="productForm.get('name')?.hasError('required')">
+          Name is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price" type="number" required />
+        <mat-error *ngIf="productForm.get('price')?.hasError('required')">
+          Price is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Manufacturer</mat-label>
+        <input matInput formControlName="manufacturer" required />
+        <mat-error *ngIf="productForm.get('manufacturer')?.hasError('required')">
+          Manufacturer is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Type</mat-label>
+        <mat-select formControlName="type">
+          <mat-option *ngFor="let type of types" [value]="type">
+            {{ type }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Processor</mat-label>
+        <mat-select formControlName="processor">
+          <mat-option [value]="null">None</mat-option>
+          <mat-option *ngFor="let processor of processors" [value]="processor">
+            {{ processor.id }} ({{ processor.clockFrequency | decimal}} GHz, {{ processor.cpuCount }} cores)
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Motherboard</mat-label>
+        <mat-select formControlName="motherboard">
+          <mat-option [value]="null">None</mat-option>
+          <mat-option *ngFor="let mb of motherboards" [value]="mb">
+            {{ mb.id }} ({{ mb.chipset }}, {{ mb.formFactor }})
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Graphic Card</mat-label>
+        <mat-select formControlName="graphicCard">
+          <mat-option [value]="null">None</mat-option>
+          <mat-option *ngFor="let gc of graphicCards" [value]="gc">
+            {{ gc.id }} ({{ gc.gpuFrequency | decimal}} GHz, {{ gc.memoryCount }} GB)
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-error *ngIf="productForm.hasError('multipleOptionalObjectsSelected')">
+        Only one optional object (Processor, Motherboard, or Graphic Card) can be selected.
+      </mat-error>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid">
+        {{ isEditMode ? 'Save' : 'Add' }}
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>
