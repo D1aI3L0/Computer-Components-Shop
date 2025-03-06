@@ -7,7 +7,7 @@ SonalCloud - https://sonarcloud.io/project/configuration?id=D1aI3L0_Computer-Com
 |2|JDBC|4,2|5|
 |3|JSP|5|6|
 |4|Backend|4|3|
-|5|Angular|-|-|
+|5|Angular|12|10|
 |6|React|-|-|
 |7|Refinement|2|3|
-|*|Total|17,2|18,5|
+|*|Total|29,2|28,5|
