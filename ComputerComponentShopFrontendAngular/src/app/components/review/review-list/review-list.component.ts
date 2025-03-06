@@ -44,4 +44,8 @@ export class ReviewListComponent implements OnInit {
   addNewReview() : void {
     this.router.navigate(['/reviews/add']);
   }
+
+  goToHome() : void {
+    this.router.navigate(['/']);
+  }
 }

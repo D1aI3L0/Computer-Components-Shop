@@ -43,4 +43,9 @@ export class MotherboardListComponent implements OnInit {
   addNewMotherboard() : void {
     this.router.navigate(['/motherboards/add']);
   }
+  
+
+  goToHome() : void {
+    this.router.navigate(['/']);
+  }
 }

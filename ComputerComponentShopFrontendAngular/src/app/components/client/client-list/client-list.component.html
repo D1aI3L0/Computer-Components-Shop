@@ -1,7 +1,12 @@
 <div class="client-list-container">
+  <div class="navigation-buttons">
   <button mat-raised-button color="primary" (click)="addNewClient()">
     Add New Client
   </button>
+  <button mat-raised-button color="primary" (click)="goToHome()">
+    Go to home page
+  </button>
+  </div>
   <table mat-table [dataSource]="clients">
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Name</th>

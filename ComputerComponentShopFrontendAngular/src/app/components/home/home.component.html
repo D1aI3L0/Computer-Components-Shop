@@ -1,45 +1,25 @@
 <div class="home-container">
-    <h1>Welcome to Our Shop!</h1>
-    <p>Explore our wide range of products, manage orders, and leave reviews.</p>
-  
     <div class="navigation-buttons">
-      <button mat-raised-button color="primary" routerLink="/products">
+      <button mat-raised-button color="primary" (click)="goToClients()">
+        View Clients
+      </button>
+      <button mat-raised-button color="primary" (click)="goToProcessors()">
+        View Porcessors
+      </button>
+      <button mat-raised-button color="primary" (click)="goToMotherboards()">
+        View Motherboards
+      </button>
+      <button mat-raised-button color="primary" (click)="goToGraphiCards()">
+        View Graphic Cards
+      </button>
+      <button mat-raised-button color="primary" (click)="goToProducts()">
         View Products
       </button>
-      <button mat-raised-button color="accent" routerLink="/orders">
+      <button mat-raised-button color="primary" (click)="goToOrders()">
         View Orders
       </button>
-      <button mat-raised-button color="warn" routerLink="/reviews">
+      <button mat-raised-button color="primary" (click)="goToReviews()">
         View Reviews
       </button>
-    </div>
-  
-    <div class="features">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>Products</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>Browse and manage our extensive catalog of products.</p>
-        </mat-card-content>
-      </mat-card>
-  
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>Orders</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>Track and manage customer orders with ease.</p>
-        </mat-card-content>
-      </mat-card>
-  
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>Reviews</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>Read and manage customer reviews for our products.</p>
-        </mat-card-content>
-      </mat-card>
     </div>
   </div>

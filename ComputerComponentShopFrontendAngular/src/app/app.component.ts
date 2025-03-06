@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
-    <h1>Computer componets shop</h1>
     <router-outlet></router-outlet>
   `,
 })

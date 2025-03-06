@@ -9,3 +9,9 @@
   table {
     width: 100%;
   }
+  
+  .navigation-buttons {
+    display: flex;
+    justify-content: left;
+    gap: 20px;
+  }

@@ -1,8 +1,12 @@
 <div class="graphic-card-list-container">
+  <div class="navigation-buttons">
     <button mat-raised-button color="primary" (click)="addNewGraphicCard()">
       Add New Graphic Card
     </button>
-  
+    <button mat-raised-button color="primary" (click)="goToHome()">
+      Go to home page
+    </button>
+  </div>
     <table mat-table [dataSource]="graphicCards">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>ID</th>

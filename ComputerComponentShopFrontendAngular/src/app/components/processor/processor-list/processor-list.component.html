@@ -1,7 +1,12 @@
 <div class="processor-list-container">  
-  <button mat-raised-button color="primary" (click)="addNewProcessor()">
-    Add New Processor
-  </button>
+  <div class="navigation-buttons">
+    <button mat-raised-button color="primary" (click)="addNewProcessor()">
+      Add New Processor
+    </button>
+    <button mat-raised-button color="primary" (click)="goToHome()">
+      Go to home page
+    </button>
+  </div>
   
   <table mat-table [dataSource]="processors">
     <ng-container matColumnDef="id">

@@ -43,4 +43,8 @@ export class GraphicCardListComponent implements OnInit {
   addNewGraphicCard() : void {
     this.router.navigate(['/graphic-cards/add']);
   }
+  
+  goToHome() : void {
+    this.router.navigate(['/']);
+  }
 }

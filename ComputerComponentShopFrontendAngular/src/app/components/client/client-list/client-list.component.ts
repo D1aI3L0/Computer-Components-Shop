@@ -43,4 +43,8 @@ export class ClientListComponent implements OnInit {
   addNewClient() : void {
     this.router.navigate(['/clients/add']);
   }
+
+  goToHome() : void {
+    this.router.navigate(['/']);
+  }
 }

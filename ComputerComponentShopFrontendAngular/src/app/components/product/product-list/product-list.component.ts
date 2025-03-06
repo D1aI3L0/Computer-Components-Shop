@@ -53,4 +53,8 @@ export class ProductListComponent implements OnInit {
   addNewProduct(): void {
     this.router.navigate(['/products/add']);
   }
+
+  goToHome() : void {
+    this.router.navigate(['/']);
+  }
 }

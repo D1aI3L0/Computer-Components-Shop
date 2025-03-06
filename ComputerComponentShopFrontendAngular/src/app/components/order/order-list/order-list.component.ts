@@ -52,4 +52,8 @@ export class OrderListComponent implements OnInit {
   addNewOrder(): void {
     this.router.navigate(["/orders/add"]);
   }
+  
+  goToHome() : void {
+    this.router.navigate(['/']);
+  }
 }

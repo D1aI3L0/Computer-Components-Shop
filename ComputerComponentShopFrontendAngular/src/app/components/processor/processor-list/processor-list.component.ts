@@ -44,4 +44,8 @@ export class ProcessorListComponent implements OnInit {
   addNewProcessor(): void {
     this.router.navigate(['/processors/add']);
   }
+
+  goToHome() : void {
+    this.router.navigate(['/']);
+  }
 }
