@@ -8,6 +8,6 @@ SonalCloud - https://sonarcloud.io/project/configuration?id=D1aI3L0_Computer-Com
 |3|JSP|5|6|
 |4|Backend|4|3|
 |5|Angular|12|10|
-|6|React|-|-|
+|6|React|6|4|
 |7|Refinement|2|3|
-|*|Total|29,2|28,5|
+|*|Total|35,2|32,5|

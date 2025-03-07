@@ -15,7 +15,7 @@
 
     <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef>Price</th>
-      <td mat-cell *matCellDef="let product">{{ product.price | currency }}</td>
+      <td mat-cell *matCellDef="let product">{{ product.price | decimal }}</td>
     </ng-container>
 
     <ng-container matColumnDef="manufacturer">
@@ -52,7 +52,7 @@
       <th mat-header-cell *matHeaderCellDef>Graphic Card</th>
       <td mat-cell *matCellDef="let product">
         <div *ngIf="product.graphicCard; else noGraphicCard">
-          {{ product.graphicCard.id }} ({{ product.graphicCard.gpuFrequency }} GHz, {{ product.graphicCard.memoryCount }} GB)
+          {{ product.graphicCard.id }} ({{ product.graphicCard.gpuFrequency | decimal}} GHz, {{ product.graphicCard.memoryCount }} GB)
         </div>
         <ng-template #noGraphicCard>N/A</ng-template>
       </td>

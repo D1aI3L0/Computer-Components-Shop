@@ -74,7 +74,6 @@ export class ReviewFormComponent implements OnInit {
   onSubmit(): void {
     if (this.reviewForm.valid) {
       const reviewData = this.reviewForm.value;
-      console.log(reviewData);
 
       if (this.isEditMode) {
         this.reviewService.updateReview(this.reviewId!, reviewData).subscribe(() => {

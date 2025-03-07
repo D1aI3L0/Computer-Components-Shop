@@ -48,7 +48,7 @@ export class OrderFormComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.orderForm = this.fb.group({
-      totalPrice: [{ value: '', disabled: true }, Validators.required],
+      totalPrice: [''],
       orderDate: ['', Validators.required],
       status: ['', Validators.required],
       paymentMethod: ['', Validators.required],
@@ -92,18 +92,15 @@ export class OrderFormComponent implements OnInit {
     const selectedProducts = this.products.filter((product) =>
       selectedProduct.includes(product)
     );
-    const totalPrice = selectedProducts.reduce((sum, product) => sum + product.price, 0);
-    this.orderForm.patchValue({ totalPrice: totalPrice }); 
+    this.orderForm.patchValue({ totalPrice: selectedProducts.reduce((sum, product) => sum + product.price, 0)}); 
   }
 
   onSubmit(): void {
     if (this.orderForm.valid) {
       const orderData = {
         ...this.orderForm.value,
-        totalPrice: parseFloat(this.orderForm.value.totalPrice),
         orderDate: new Date(this.orderForm.value.orderDate).toISOString(), 
       };
-      console.log(orderData.totalPrice);
 
       if (this.isEditMode) {
         this.orderService.updateOrder(this.orderId!, orderData).subscribe(() => {
